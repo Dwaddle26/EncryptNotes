@@ -1,6 +1,6 @@
 # Project1*
 Short Project Description*:
-This is will the base for which we create our project on. It will be updated, added too and Revised as we continue along the process. Towards the final product.
+This will be the base on which we create our project. It will be updated, added to, and revised as we continue along the process towards the final product.
 
 Members:
 [Kaden	Roof]	kr270437@my.stchas.edu,	Developer
