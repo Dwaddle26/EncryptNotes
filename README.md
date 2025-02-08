@@ -1,6 +1,6 @@
-# CloudNotes
+# EncryptNotes
 Short Project Description*:
-CloudNotes is a secure and user-friendly note-taking application that 
+EncryptNotes is a secure and user-friendly note-taking application that 
 prioritizes privacy through end-to-end encryption. Users can store personal 
 notes, reminders, and sensitive information with peace of mind, knowing that
 only they can access their data. The application will feature an intuitive 
