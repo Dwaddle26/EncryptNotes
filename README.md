@@ -1,5 +1,5 @@
 # EncryptNotes
-Short Project Description*:
+Short Project Description:
 EncryptNotes is a secure and user-friendly note-taking application that 
 prioritizes privacy through end-to-end encryption. Users can store personal 
 notes, reminders, and sensitive information with peace of mind, knowing that
