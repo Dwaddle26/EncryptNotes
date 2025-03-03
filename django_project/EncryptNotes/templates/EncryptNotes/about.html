@@ -1,13 +1,18 @@
-<!DOCTYPE html>
-<html>
-<head>
-    {%if title %}
-        <title>Django Blog - {{ title }}</title>
-    {% else %}
-        <title>Django Blog</title>
-    {% endif %}
-</head>
-<body>
-    <h1>EncryptNotes About</h1>
-</body>
-</html>
+{% extends "EncryptNotes/base.html" %}
+{% block content %}    
+    <h1>EncryptNotes is a secure and user-friendly note-taking application that 
+        prioritizes privacy through end-to-end encryption. Users can store personal 
+        notes, reminders, and sensitive information with peace of mind, knowing that
+        only they can access their data. The application will feature an intuitive 
+        interface, support for text formatting, categorization of notes, and the 
+        ability to sync across multiple devices. Encryption ensures that notes are 
+        securely stored and decrypted only by the user, making this app ideal for 
+        individuals looking for a secure, private, and seamless note-taking experience.
+        
+        Created by:
+        [Kaden	Roof] 
+        [Jacob	Nagel] 
+        [Duncan	Waddle]	
+        [Kurejake Brown]
+        [Grant	Burkemper]</h1>>
+{% endblock content %}
