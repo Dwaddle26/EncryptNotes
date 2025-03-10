@@ -17,21 +17,24 @@ posts = [
 ]
 
 # Define the view function for the home page.
-def home(request):
-    # Create a dictionary called 'context' to pass data to the template.
-    context = {
-        # Pass the 'posts' list to the template under the key 'posts'.
-        'posts': posts
-    }
-    # Render the 'home.html' template and pass the 'context' dictionary.
+def login(request):
+    # Render the 'account.html' template and pass the 'context' dictionary.
     # The 'request' object is necessary for rendering.
-    # The 'EncryptNotes/home.html' string specifies the template file's path.
-    return render(request, 'EncryptNotes/home.html', context)
+    # The 'EncryptNotes/account.html' string specifies the template file's path.
+    return render(request, 'EncryptNotes/account.html')
 
 # Define the view function for the about page.
-def about(request):
-    # Render the 'about.html' template and pass a dictionary with the title.
+def mainpage(request):
+    # Render the 'mainpage.html' template and pass a dictionary with the title.
+    # The 'request' object is necessary for rendering.
+    # The 'EncryptNotes/mainpage.html' string specifies the template file's path.
+    # {'title': 'Main'} is a dictionary that passes the string "Main" to the template with the key "title".
+    return render(request, 'EncryptNotes/mainpage.html', {'title': 'Main'})
+
+# Define the view function for the note taking page.
+def notes(request):
+    # Render the 'notepage.html' template and pass a dictionary with the title.
     # The 'request' object is necessary for rendering.
     # The 'EncryptNotes/about.html' string specifies the template file's path.
     # {'title': 'About'} is a dictionary that passes the string "About" to the template with the key "title".
-    return render(request, 'EncryptNotes/about.html', {'title': 'About'})
+    return render(request, 'EncryptNotes/notepage.html', {'title': 'Notes'})
