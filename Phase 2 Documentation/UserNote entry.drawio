@@ -1,0 +1,94 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36" version="26.1.0">
+  <diagram name="Page-1" id="rPpiHIoaBsZmksp-OnYg">
+    <mxGraphModel dx="1195" dy="743" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="CkiuJ2fdXJ0VBb8FBs4h-1" value="Example:&lt;div&gt;A User Enters a Note&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry width="140" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="CkiuJ2fdXJ0VBb8FBs4h-2" value="User" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry y="60" width="50" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="CkiuJ2fdXJ0VBb8FBs4h-3" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="50" y="70" as="sourcePoint" />
+            <mxPoint x="120" y="70" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CkiuJ2fdXJ0VBb8FBs4h-5" value="Note Text" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="45" y="70" width="70" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="CkiuJ2fdXJ0VBb8FBs4h-6" value="Front End&lt;div&gt;(note entry interface)&lt;/div&gt;" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="120" y="30" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="CkiuJ2fdXJ0VBb8FBs4h-7" value="Back End" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="270" y="30" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="CkiuJ2fdXJ0VBb8FBs4h-8" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="CkiuJ2fdXJ0VBb8FBs4h-6" target="CkiuJ2fdXJ0VBb8FBs4h-7">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="210" y="110" as="sourcePoint" />
+            <mxPoint x="260" y="60" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CkiuJ2fdXJ0VBb8FBs4h-9" value="Note Text" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="200" y="70" width="70" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="CkiuJ2fdXJ0VBb8FBs4h-10" value="MySQL database" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="450" y="130" width="100" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="CkiuJ2fdXJ0VBb8FBs4h-13" value="" style="endArrow=classic;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="CkiuJ2fdXJ0VBb8FBs4h-7">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="410" y="280" as="sourcePoint" />
+            <mxPoint x="480" y="30" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CkiuJ2fdXJ0VBb8FBs4h-14" value="Note Text" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="355" y="15" width="70" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="CkiuJ2fdXJ0VBb8FBs4h-15" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.89;entryY=0.754;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0;exitY=0.75;exitDx=0;exitDy=0;" edge="1" parent="1" target="CkiuJ2fdXJ0VBb8FBs4h-7">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="480" y="45" as="sourcePoint" />
+            <mxPoint x="460" y="230" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CkiuJ2fdXJ0VBb8FBs4h-16" value="Encrypted Note" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="380" y="70" width="110" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="CkiuJ2fdXJ0VBb8FBs4h-17" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.744;exitY=0.952;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="CkiuJ2fdXJ0VBb8FBs4h-7" target="CkiuJ2fdXJ0VBb8FBs4h-10">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="410" y="280" as="sourcePoint" />
+            <mxPoint x="460" y="230" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CkiuJ2fdXJ0VBb8FBs4h-18" value="Encrypted Note" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="330" y="130" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="CkiuJ2fdXJ0VBb8FBs4h-21" value="Key Management API (Possible)" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="650" y="10" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="CkiuJ2fdXJ0VBb8FBs4h-22" value="Encryption Component (Python Libraries)" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="480" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="CkiuJ2fdXJ0VBb8FBs4h-23" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.948;entryY=0.765;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0;exitY=0.75;exitDx=0;exitDy=0;" edge="1" parent="1" source="CkiuJ2fdXJ0VBb8FBs4h-21" target="CkiuJ2fdXJ0VBb8FBs4h-22">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="660" y="340" as="sourcePoint" />
+            <mxPoint x="710" y="290" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CkiuJ2fdXJ0VBb8FBs4h-24" value="Encryption Key" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="580" y="60" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="CkiuJ2fdXJ0VBb8FBs4h-25" value="" style="endArrow=classic;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0.979;exitY=0.379;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="CkiuJ2fdXJ0VBb8FBs4h-22" target="CkiuJ2fdXJ0VBb8FBs4h-21">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="660" y="340" as="sourcePoint" />
+            <mxPoint x="710" y="290" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CkiuJ2fdXJ0VBb8FBs4h-26" value="Request User Encryption Key" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="560" y="10" width="90" height="20" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
