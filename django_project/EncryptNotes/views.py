@@ -11,3 +11,9 @@ def home(request):
 
 def about(request):
     return render(request, 'EncryptNotes/about.html', {'title': 'About'})
+
+def create(request):
+    return render(request, 'EncryptNotes/create.html', {'title': 'create'})
+    
+def announcements(request):
+    return render(request, 'EncryptNotes/announcements.html', {'title': 'announcements'})

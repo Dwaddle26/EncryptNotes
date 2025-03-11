@@ -30,12 +30,13 @@
             <div class="navbar-nav mr-auto">
               <a class="nav-item nav-link" href="{% url 'EncryptNotes-home' %}">Home</a>
               <a class="nav-item nav-link" href="{% url 'EncryptNotes-about' %}">About</a>
+              <a class="nav-item nav-link" href="{% url 'EncryptNotes-create' %}">Create</a>
             </div>
             <!-- Navbar Right Side -->
             <div class="navbar-nav">
               {% if user.is_authenticated %}
                 <a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a>
-                <form action="{% url 'logout' %}" method="post" class='d-line'>{% csrf_token %}<button type="submit" class='nav-item nav-link btn btn-linkSS'>Logout</button></form>
+                <form action="{% url 'logout' %}" method="post">{% csrf_token %}<button type="submit" class='btn btn-outline-light'>Logout</button></form>
               {% else %}
                 <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
                 <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
@@ -59,13 +60,10 @@
         </div>
         <div class="col-md-4">
           <div class="content-section">
-            <h3>Our Sidebar</h3>
-            <p class='text-muted'>You can put any information here you'd like.
+            <h3>EncryptNotes Sidebar</h3>
+            <p class='text-muted'>Currently there is nothing here but annoucements. It's for updates to our web-app if wish to continue work on it further.
               <ul class="list-group">
-                <li class="list-group-item list-group-item-light">Latest Posts</li>
-                <li class="list-group-item list-group-item-light">Announcements</li>
-                <li class="list-group-item list-group-item-light">Calendars</li>
-                <li class="list-group-item list-group-item-light">etc</li>
+                <a class="list-group-item list-group-item-light" href="{% url 'EncryptNotes-announcements' %}">Announcements</a>
               </ul>
             </p>
           </div>

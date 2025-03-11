@@ -1,0 +1,16 @@
+{% extends "EncryptNotes/base.html" %}
+{% block content %}
+    <style>
+        #create {
+            width: 740px;
+            height: 500px;
+        }
+    </style>
+    <h1>Place Holder</h1>
+    <hr>
+    <form action="/create/" method="post">
+        <input class="ml" type="submit" value="SAVE">
+        <br>
+        <input id="create" type="text">
+    </form>
+{% endblock content %}
