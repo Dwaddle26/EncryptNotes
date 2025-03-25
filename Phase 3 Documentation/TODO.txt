@@ -1,0 +1,12 @@
+System Dev Side
+-- Complete and polish Front End.
+Server Side
+-- Server db completed
+
+Need working demo completed by April 13th
+User create account, login, list note, create note, save note
+
+Project management side
+-- Do quality checklist document
+-- Do use case document
+-- ERD diagrams, once more complete in addition to data flow diagram
