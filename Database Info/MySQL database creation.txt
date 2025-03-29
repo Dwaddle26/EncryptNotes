@@ -1,0 +1,30 @@
+How to run
+Install Python
+pip install
+django, crispy, mysqlclient, crispy-bootstrap4
+
+Install mySQL 8.0 and run following commands
+
+CREATE DATABASE enotes;
+
+CREATE USER 'EnotesApp'@'localhost' IDENTIFIED BY 'T1?_6£SPt-3%';
+GRANT ALL PRIVILEGES ON enotes.* TO 'EnotesApp'@'localhost' WITH GRANT OPTION;
+
+CREATE TABLE USERS (
+	UserID INT AUTO_INCREMENT,
+	Username VARCHAR(150) NOT NULL UNIQUE,
+	password_hash VARCHAR(255) NOT NULL,
+	userKey VARCHAR(255),
+	PRIMARY KEY (UserID)
+	);
+	
+CREATE TABLE NOTES (
+	NoteID int AUTO_INCREMENT NOT_NULL,
+	UserID int NOT_NULL,
+	Title VARCHAR(255),
+	Contents TEXT,
+	CREATE_DATE TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	UPDATE_DATE TIMESTAMP,
+	FOREIGN KEY (UserID) REFERENCES USERS (id) ON DELETE CASCADE,
+	PRIMARY KEY (NoteID)
+	);
