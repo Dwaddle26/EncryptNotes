@@ -81,8 +81,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
              'NAME': 'enotes',
-             'USER': 'EnotesApp',    
-             'PASSWORD': 'T1?_6£SPt-3%',  
+             'USER': 'root',    
+             'PASSWORD': 'toor',  
              'HOST': 'localhost',
              'PORT': '3306',    
     }
@@ -134,3 +134,4 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 LOGIN_REDIRECT_URL = 'EncryptNotes-home'
 LOGIN_URL = 'login'
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

@@ -10,14 +10,13 @@ CREATE DATABASE enotes;
 CREATE USER 'EnotesApp'@'localhost' IDENTIFIED BY 'T1?_6£SPt-3%';
 GRANT ALL PRIVILEGES ON enotes.* TO 'EnotesApp'@'localhost' WITH GRANT OPTION;
 
-CREATE TABLE USERS (
-	UserID INT AUTO_INCREMENT,
-	Username VARCHAR(150) NOT NULL UNIQUE,
-	password_hash VARCHAR(255) NOT NULL,
-	userKey VARCHAR(255),
-	PRIMARY KEY (UserID)
-	);
-	
+For testing
+ATEST123
+A@A.COM
+Password: idkpass2025
+
+
+LATER	
 CREATE TABLE NOTES (
 	NoteID int AUTO_INCREMENT NOT_NULL,
 	UserID int NOT_NULL,
