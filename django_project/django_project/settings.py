@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'tinymce',
+    
 ]
 
 MIDDLEWARE = [
@@ -137,8 +137,4 @@ LOGIN_REDIRECT_URL = 'EncryptNotes-home'
 LOGIN_URL = 'login'
 # Fix error that was occurring
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-# Add options for security
-#SECURE_SSL_REDIRECT = True
-#SECURE_HSTS_SECONDS = 31536000
-#SECURE_BROWSER_XSS_FILTER = True 
-#SECURE_CONTENT_TYPE_NOSNIFF = True
+

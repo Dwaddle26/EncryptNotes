@@ -2,7 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
-from .encTools import 
+from .encTools import *
 
 User = get_user_model()
 
@@ -24,10 +24,7 @@ class Note(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
-        return f"{self.note_title} Note by {self.user.username} - Created on {self.created_at}"
-        
-        from django.contrib.auth.models import User
-from django.db import models
+        return f"{self.title} Note by {self.user.username} - Created on {self.created_at}"
 
 # Extend user model to add a field for a user encryption key
 class UserProfile(models.Model):
