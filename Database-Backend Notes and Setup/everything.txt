@@ -1,7 +1,7 @@
 How to run?
 Install Python
 pip install all these
-django, crispy, crispy-bootstrap4, mysqlclient, django-tinymce
+django, crispy, crispy-bootstrap4, mysqlclient, django-tinymce, django-tinymce4-lite, fernet, cryptography, pyenchant
 
 Install mySQL 8.0 server and workbench.  setup root account with password toor
 
@@ -18,12 +18,14 @@ ATEST123
 A@A.COM
 idkpass2025
 
+
+
 -- Would like to implement this for text box, trying to figure out how to make it work
 TinyMCE Text Editor
 PyEnchant spell checker
 https://django-tinymce.readthedocs.io/en/latest/installation.html
 
--- Using Fernet for encryption. CryptoDome is an option but more difficult to implement.  Fernet is super easy and uses AES128.  Open to suggestions on this but going with Fernet unless anyone objects.
+
 
 -- Need AI or ML implementation, not sure on this
 -- Need to figure out front end and how to list out notes a user has created.
