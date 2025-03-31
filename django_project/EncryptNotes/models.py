@@ -16,11 +16,11 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
-#Note class, this is a Note
+# Note class, this is a Note
 class Note(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.TextField()
-    content = models.TextField()
+    content = models.HTMLField()
     created_at = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
@@ -30,7 +30,7 @@ class Note(models.Model):
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     encryption_key = models.TextField()
-    #create and save encryption key for a user if one doesn't exist
+    # create and save encryption key for a user if one doesn't exist
     def save(self, *args, **kwargs):
         if not self.encryption_key:
             self.encryption_key = encrypt_user_key(generate_user_key()).decode()
