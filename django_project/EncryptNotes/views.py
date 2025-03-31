@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import Post
-from .models import Notes
+from .models import Note
 from cryptography.fernet import Fernet
 
 
@@ -31,12 +31,12 @@ def list(request):
     return render(request, 'EncryptNotes/list.html', {'title': 'Note list'})
     
 # View a specific note
-def view(request)
+def view(request):
     user = request.user  
     notes = Note.objects.filter(user=user)  
     enc_user_key = user.userprofile.encryption_key
     user_key = decrypt_user_key(enc_user_key)
-    return render(request, 'EncryptNotes/view.html', {'title:': {note.title}}
+    return render(request, 'EncryptNotes/view.html', {'title:': {note.title}})
 # Edit a specific note
 
 

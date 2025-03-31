@@ -7,4 +7,5 @@ urlpatterns = [
     path('create/', views.create, name='EncryptNotes-create'),
     path('announcements/', views.announcements, name='EncryptNotes-announcements'),
     
+    
 ]

@@ -9,12 +9,12 @@ def convert_DJ_key():
     return Fernet(base64.urlsafe_b64encode(hash_key[:32]))
     
 def encrypt_user_key(ukey):
-    fernet = convert_DJ_key()
-    return fernet.encrypt(ukey.encode())
+    f = convert_DJ_key()
+    return f.encrypt(ukey.encode())
     
 def decrypt_user_key(ukey):
-    fernet = convert_DJ_key()
-    return fernet.decrypt(ukey.decode())
+    f = convert_DJ_key()
+    return f.decrypt(ukey.decode())
     
 #user encryption keys
 
