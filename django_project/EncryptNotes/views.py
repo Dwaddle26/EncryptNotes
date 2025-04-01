@@ -17,9 +17,25 @@ def about(request):
     
 def announcements(request):
     return render(request, 'EncryptNotes/announcements.html', {'title': 'announcements'})
-    
+
+# Creates a note, encrypts it, saves to database
 def create(request):
-    if request.method == 'POST
+    if request.method == 'POST'
+        ukey = decrypt_user_key(request.user.userprofile.encryption_key)
+        nTitle = request.POST['nTitle']
+        nContent = request.POST['nContent']
+        eukey = user.userprofile.encryption_key
+        ukey = decrypt_user_key(eukey)
+        encTitle = encrypt_data(ukey, nTitle)
+        encContent = encrypt_data(ukey, nContent)
+        Note.objects.create(
+        user = request.user
+        title = enc_title
+        content = enc_content
+        )
+        return HttpResponseRedirect('EncryptNotes/list.html')
+
+        
     return render(request, 'EncryptNotes/create.html', {'title': 'Create'})
 
 # Decrypts and lists notes for a logged in user
@@ -30,7 +46,7 @@ def list(request):
     ukey = decrypt_user_key(eukey)
     noteTitles = [decrypt_data(ukey, note.title) for note in notes]
     noteContents = [decrypt_data(ukey, note.content) for note in notes]
-    return render(request, 'notes/list.html', {'notes': noteContents})
+    return render(request, 'EncryptNotes/list.html', {'notes': noteContents})
 
 # View a specific note
 def view(request, note_id):
@@ -41,7 +57,7 @@ def view(request, note_id):
     thisTitle = decrypt_data(ukey, note.title)
     thisNote = decrypt_data(ukey, note.content)
     #FIX THIS
-    return render(request, 'EncryptNotes/view.html', {'title:': {note.title} 'note': thisNote})
+    return render(request, 'EncryptNotes/view.html', {'title:': thisTitle 'note': thisNote})
 
 # Edit a specific note
 def edit(request, note_id):
@@ -49,16 +65,19 @@ def edit(request, note_id):
     note = Note.objects.get(id=note_id, user=user)
     if request.method == 'POST':
         ukey = decrypt_user_key(user.userprofile.encryption_key)
-        editedNote = request.POST['content']
-        enc_content = encrypt_data(user_key, editedNote)
+        editedTitle = request.POST['nTitle']
+        editedNote = request.POST['nContent']
+        enc_title = encrypt_data(ukey, editedTitle)
+        enc_content = encrypt_data(ukey, editedNote)
+        note.title = enc_title
         note.content = enc_content
         note.save()
-        return HttpResponseRedirect('/EncryptNotes/list')
+        return HttpResponseRedirect('EncryptNotes/list.html')
     
     ukey = decrypt_user_key(user.userprofile.encryption_key)
-    thisNote = decrypt_data(ukey, note.note_content)
-    thisTitle = 
-    return render(request, 'notes/edit.html', {'note': thisNote})
+    thisNote = decrypt_data(ukey, note.content)
+    thisTitle = decrypt_data(ukey, note.title)
+    return render(request, 'EncryptNotes/edit.html', {'note': thisNote})
 
 
 
