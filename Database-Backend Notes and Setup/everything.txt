@@ -1,9 +1,10 @@
 How to run?
-Install Python
-pip install all these
-django, crispy, crispy-bootstrap4, mysqlclient, django-tinymce, fernet, cryptography, pyenchant
+Install Python to your PC
 
-Install mySQL 8.0 server and workbench.  setup root account with password toor
+Open command prompt, pip install all these dependencies
+django, crispy, crispy-bootstrap4, mysqlclient, django-tinymce, fernet, cryptography, pyenchant, social-auth-app-django
+
+Install mySQL 8.0 server AND workbench.  setup root account with password toor
 
 and run following command, CREATE DATABASE enotes;
 
