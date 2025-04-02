@@ -3,6 +3,7 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
 from .encTools import *
+from tinymce.models import HTMLField
 
 User = get_user_model()
 
@@ -20,7 +21,7 @@ class Post(models.Model):
 class Note(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.TextField()
-    content = models.HTMLField()
+    content = HTMLField()
     created_at = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):

@@ -62,7 +62,8 @@ def view(request, note_id):
     thisTitle = decrypt_data(ukey, note.title)
     thisNote = decrypt_data(ukey, note.content)
     #FIX THIS
-    return render(request, 'EncryptNotes/view.html', {'title:': thisTitle 'note': thisNote})
+    return render(request, 'EncryptNotes/view.html', {'title': thisTitle, 'note': thisNote})
+
 
 # Edit a specific note
 def edit(request, note_id):
