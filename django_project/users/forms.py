@@ -9,5 +9,11 @@ class UserRegisterForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['username', 'email', 'password1', 'password2']
+        
+# Form for a note
 class NoteForm(forms.ModelForm):
-    noteTitle = forms. 
+    itle = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Enter a title'}))
+    content = forms.CharField(widget=TinyMCE(attrs={'cols': 80, 'rows': 30}))
+    class Meta:
+        model = Note
+        fields = ['title', 'content']
