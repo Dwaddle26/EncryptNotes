@@ -1,1 +1,10 @@
 {% extends "EncryptNotes/base.html" %}
+
+{% block content %}
+    <h1>{{ title }}</h1>
+    <hr>
+    <p>{{ note }}</p>
+    
+    <a href="{% url 'edit_note' note_id %}" class="btn btn-primary">Edit Note</a>
+    <a href="{% url 'list_notes' %}" class="btn btn-secondary">Back to Notes</a>
+{% endblock content %}

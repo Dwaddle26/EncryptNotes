@@ -46,12 +46,17 @@ def create(request):
 # Decrypts and lists notes for a logged in user
 def list(request):
     user = request.user  
-    notes = Note.objects.filter(user=user) 
+    notes = Note.objects.filter(user=user)
     eukey = user.userprofile.encryption_key
     ukey = decrypt_user_key(eukey)
-    noteTitles = [decrypt_data(ukey, note.title) for note in notes]
-    noteContents = [decrypt_data(ukey, note.content) for note in notes]
-    return render(request, 'EncryptNotes/list.html', {'notes': noteContents})
+    #noteTitles = [decrypt_data(ukey, note.title) for note in notes]
+    #noteContents = [decrypt_data(ukey, note.content) for note in notes]
+    #noteID = [decrypt_data(ukey, note.id) for note in notes]
+    noteList = [
+        {'id': note.id, 'title': decrypt_data(ukey, note.title), 'content': decrypt_data(ukey, note.content) }
+        for note in notes
+    ]
+    return render(request, 'EncryptNotes/list.html', {'notes': noteList})
 
 # View a specific note
 def view(request, note_id):
