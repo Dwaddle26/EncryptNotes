@@ -3,6 +3,7 @@
     <h1>Create a New Note</h1>
     <hr>
     <form method="post">
+		{% csrf_token %}
         <div class="form-group">
             <label for="id_title">Title:</label>
             {{ form.title }}
@@ -13,5 +14,15 @@
         </div>
         <button type="submit" class="btn btn-primary">Save Note</button>
     </form>
+	<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+            selector: '#id_content',
+            plugins: 'lists link image table',
+            toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | bullist numlist outdent indent',
+            menubar: false
+        });
+    </script>
+
 
 {% endblock content %}

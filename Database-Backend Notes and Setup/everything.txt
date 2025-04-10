@@ -26,6 +26,7 @@ idkpass2025
 TinyMCE Text Editor
 PyEnchant spell checker
 https://django-tinymce.readthedocs.io/en/latest/installation.html
+https://stackoverflow.com/questions/62851250/tinymce-htmlfield-and-django-textfield-dont-show-up-in-production
 
 
 
