@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Post
 from .models import Note
 from cryptography.fernet import Fernet
@@ -27,7 +27,7 @@ def create(request):
             ukey = decrypt_user_key(request.user.userprofile.encryption_key)
             nTitle = form.cleaned_data['title']
             nContent = form.cleaned_data['content']
-            eukey = user.userprofile.encryption_key
+            eukey = request.user.userprofile.encryption_key
             ukey = decrypt_user_key(eukey)
             encTitle = encrypt_data(ukey, nTitle)
             encContent = encrypt_data(ukey, nContent)

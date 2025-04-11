@@ -2,10 +2,11 @@
 {% load crispy_forms_tags %}
 {% block content %}
     <div class="content-section">
+	 <h1 class="account-heading">User Profile</h1>
       <div class="media">
         <div class="media-body">
-          <h2 class="account-heading">{{ user.username }}</h2>
-          <p class="text-secondary">{{ user.email }}</p>
+          <h2 class="account-heading">Username: {{ user.username }}</h2>
+          <p class="text-secondary">Email: {{ user.email }}</p>
         </div>
       </div>
       <!-- FORM HERE -->
