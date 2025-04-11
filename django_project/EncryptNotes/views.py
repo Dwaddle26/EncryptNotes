@@ -46,7 +46,7 @@ def create(request):
 # Decrypts and lists notes for a logged in user
 def list(request):
     user = request.user
-    userProf = user.profile
+    userProf = user.userprofile
     eukey = userProf.encryption_key
     ukey = decrypt_user_key(eukey)
     notes = Note.objects.filter(user=user)

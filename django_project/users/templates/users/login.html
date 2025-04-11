@@ -17,5 +17,9 @@
                 Need An Account? <a class="ml-2" href="{% url 'register' %}">Sign Up Now</a>
             </small>
         </div>
+		<div class="mt-4">
+            <p>Or login using:</p>
+            <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-danger">Google</a>
+		</div>
     </div>
 {% endblock content %}

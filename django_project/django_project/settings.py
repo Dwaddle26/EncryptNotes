@@ -70,6 +70,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -97,8 +99,8 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '<ADDTHIS>'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '<ADDTHIS>'
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '1026769892872-s3jne9fkastif98asvf1in8iseo0uqgf.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
 
 
 
