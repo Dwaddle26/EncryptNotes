@@ -26,6 +26,3 @@ class Note(models.Model):
     
     def __str__(self):
         return f"{self.title} Note by {self.user.username} - Created on {self.created_at}"
-
-
-

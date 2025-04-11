@@ -13,13 +13,18 @@ def convert_DJ_key():
 #Returns: encrypted user key
 def encrypt_user_key(ukey):
     f = convert_DJ_key()
+    if isinstance(ukey, str):
+        ukey = ukey.encode()
     return f.encrypt(ukey)
+    
 
 # decrypt a user's key with DJango's secret key
 #ukey: the user's key
 #Returns: decrypted user key
 def decrypt_user_key(ukey):
     f = convert_DJ_key()
+    if isinstance(ukey, str):
+        ukey = ukey.encode()
     return f.decrypt(ukey)
     
 #Generates a new user encryption key with Fernet
@@ -33,7 +38,10 @@ def generate_user_key():
 #Returns: encrypted data
 def encrypt_data(key, info):
     f = Fernet(key)
-    return f.encrypt(info.encode())
+    if isinstance(info, str):
+        info = info.encode()
+    
+    return f.encrypt(info)
 
 #Decrypts data with Fernet
 #key: the encryption key
@@ -41,4 +49,6 @@ def encrypt_data(key, info):
 #Returns: decrypted data
 def decrypt_data(key, info):
     f = Fernet(key)
+    if isinstance(info, str):
+        info = info.encode()
     return f.decrypt(info).decode()

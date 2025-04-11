@@ -7,8 +7,8 @@ urlpatterns = [
     path('create/', views.create, name='EncryptNotes-create'),
     path('announcements/', views.announcements, name='EncryptNotes-announcements'),
     path('list/', views.list, name='EncryptNotes-list'),
-    path('edit/', views.edit, name='EncryptNotes-edit'),
-    path('view/', views.view, name='EncryptNotes-view')
+    path('edit/<int:note_id>', views.edit, name='EncryptNotes-edit'),
+    path('view/<int:note_id>/', views.view, name='EncryptNotes-view')
     
     
     
