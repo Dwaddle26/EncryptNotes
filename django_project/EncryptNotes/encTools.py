@@ -13,14 +13,14 @@ def convert_DJ_key():
 #Returns: encrypted user key
 def encrypt_user_key(ukey):
     f = convert_DJ_key()
-    return f.encrypt(ukey.encode())
+    return f.encrypt(ukey)
 
 # decrypt a user's key with DJango's secret key
 #ukey: the user's key
 #Returns: decrypted user key
 def decrypt_user_key(ukey):
     f = convert_DJ_key()
-    return f.decrypt(ukey.decode())
+    return f.decrypt(ukey)
     
 #Generates a new user encryption key with Fernet
 #Returns: new encryption key

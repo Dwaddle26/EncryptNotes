@@ -36,7 +36,7 @@ def create(request):
             title = encTitle,
             content = encContent
             )
-            return redirect('EncryptNotes/list.html')
+            return redirect('EncryptNotes-list')
     else:
         #GET request needs an empty note form
         form = NoteForm()
@@ -45,10 +45,11 @@ def create(request):
 
 # Decrypts and lists notes for a logged in user
 def list(request):
-    user = request.user  
-    notes = Note.objects.filter(user=user)
-    eukey = user.userprofile.encryption_key
+    user = request.user
+    userProf = user.profile
+    eukey = userProf.encryption_key
     ukey = decrypt_user_key(eukey)
+    notes = Note.objects.filter(user=user)
     #noteTitles = [decrypt_data(ukey, note.title) for note in notes]
     #noteContents = [decrypt_data(ukey, note.content) for note in notes]
     #noteID = [decrypt_data(ukey, note.id) for note in notes]

@@ -6,9 +6,9 @@ urlpatterns = [
     path('about/', views.about, name='EncryptNotes-about'),
     path('create/', views.create, name='EncryptNotes-create'),
     path('announcements/', views.announcements, name='EncryptNotes-announcements'),
-    path('list/', views.create, name='EncryptNotes-list'),
-    path('edit/', views.create, name='EncryptNotes-edit'),
-    path('view/', views.create, name='EncryptNotes-view')
+    path('list/', views.list, name='EncryptNotes-list'),
+    path('edit/', views.edit, name='EncryptNotes-edit'),
+    path('view/', views.view, name='EncryptNotes-view')
     
     
     
