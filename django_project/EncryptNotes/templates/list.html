@@ -1,0 +1,17 @@
+{% extends "EncryptNotes/base.html" %}
+{% block content %}
+    <h1>Note List</h1>
+    <hr>
+    <ul class="note-list">
+        {% for note in notes %}
+            <li class="note-item">
+                <strong>{{ note.title }}</strong><br>
+                <p>{{ note.content|truncatechars:100 }}</p>
+                <a href="{% url 'EncryptNotes-view' note.id %}">View</a>
+                <a href="{% url 'EncryptNotes-edit' note.id %}">Edit</a>
+            </li>
+        {% empty %}
+            <p>No notes found.</p>
+        {% endfor %}
+    </ul>
+{% endblock content %}

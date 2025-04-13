@@ -1,0 +1,107 @@
+.navbar .btn {
+    font-size: 1rem;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.navbar .btn-primary {
+    background-color: #755601;
+    border-color: #007bff;
+}
+
+.navbar .btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.navbar .btn-info {
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+}
+
+.navbar .btn-outline-light {
+    color: #fff;
+    border-color: #fff;
+}
+
+.notebook-page {
+    background: linear-gradient(white 90%, #a5c6f7 50%) repeat-y;
+    background-size: 100% 25px; /* Spacing between lines */
+    border: 1px solid #ddd;
+    border-left: 5px solid #fc4747; /* Red margin on the left */
+    padding: 15px 20px; /* Adjust padding to align text */
+    margin: 10px 0;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: relative;
+    line-height: 25px; /* Match the line spacing of the background */
+}
+
+.notebook-page h1 {
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.notebook-page p {
+    white-space: pre-wrap; /* Preserve line breaks in content */
+    margin: 0;
+}
+
+.notebook-page textarea {
+    background: transparent; /* Make the background transparent */
+    border: none; /* Remove the border */
+    width: 100%; /* Make the textarea span the full width */
+    height: 300px; /* Adjust the height as needed */
+    resize: none; /* Disable resizing */
+    outline: none; /* Remove the focus outline */
+    font-size: 1em; /* Adjust font size to match the lines */
+    line-height: 25px; /* Match the line spacing of the notebook */
+    color: #333; /* Text color */
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margin */
+}
+
+.notebook-page strong {
+    font-size: 1.2em;
+    color: #333;
+    display: block;
+    margin-bottom: 15px; /* Add spacing between title and content */
+}
+
+.notebook-page .note-buttons {
+    position: absolute;
+    top: 6px;
+    right: 15px;
+    display: flex;
+    flex-direction: column; /* Stack buttons vertically */
+    gap: 10px; /* Add spacing between buttons */
+    align-items: flex-end; /* Align buttons to the right */
+    justify-content: flex-start; /* Ensure buttons start at the top */
+    max-width: calc(100% - 30px); /* Prevent buttons from overflowing the note */
+}
+
+.notebook-page .note-buttons a {
+    text-align: center;
+    padding: 5px 10px;
+    font-size: 0.9em;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.notebook-page .note-buttons a.btn-primary {
+    background-color: #007bff;
+    color: white;
+}
+
+.notebook-page .note-buttons a.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+}
+
+.notebook-page .note-buttons a.btn-danger {
+    background-color: #dc3545;
+    color: white;
+}

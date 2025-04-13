@@ -1,1 +1,20 @@
 {% extends "EncryptNotes/base.html" %}
+
+{% block content %}
+    <h1>Edit Note</h1>
+    <hr>
+    <form method="post" class="notebook-page">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.title.label_tag }}
+            {{ form.title }}
+        </div>
+        <div class="form-group">
+            {{ form.content.label_tag }}
+            {{ form.content }}
+        </div>
+        <button type="submit" class="btn btn-success">Save</button>
+        <a href="{% url 'EncryptNotes-home' %}" class="btn btn-secondary">Cancel</a>
+        <a href="{% url 'EncryptNotes-delete' note.id %}" class="btn btn-danger">Delete</a>
+    </form>
+{% endblock content %}

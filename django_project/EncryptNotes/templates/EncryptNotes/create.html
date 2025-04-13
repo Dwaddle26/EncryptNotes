@@ -1,9 +1,10 @@
 {% extends "EncryptNotes/base.html" %}
+
 {% block content %}
     <h1>Create a New Note</h1>
     <hr>
-    <form method="post">
-		{% csrf_token %}
+    <form method="post" class="notebook-page">
+        {% csrf_token %}
         <div class="form-group">
             <label for="id_title">Title:</label>
             {{ form.title }}
@@ -13,8 +14,10 @@
             {{ form.content }}
         </div>
         <button type="submit" class="btn btn-primary">Save Note</button>
+        <a href="{% url 'EncryptNotes-home' %}" class="btn btn-secondary">Cancel</a>
     </form>
-	<script src="https://cdn.tiny.cloud/1/77imh3r0wkiucf1epdh85cswmo23a6lehp5mbfyarmtwrf8g/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+
+    <script src="https://cdn.tiny.cloud/1/77imh3r0wkiucf1epdh85cswmo23a6lehp5mbfyarmtwrf8g/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
     <script>
         tinymce.init({
             selector: '#id_content',
@@ -23,6 +26,4 @@
             menubar: false
         });
     </script>
-
-
 {% endblock content %}

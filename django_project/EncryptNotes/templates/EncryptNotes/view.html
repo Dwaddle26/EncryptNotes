@@ -1,10 +1,13 @@
 {% extends "EncryptNotes/base.html" %}
 
 {% block content %}
-    <h1>{{ title }}</h1>
-    <hr>
-    <p>{{ note }}</p>
+    <div class="notebook-page">
+        <h1>{{ title }}</h1>
+        <hr>
+        <p>{{ content }}</p>
+    </div>
+    <a href="{% url 'EncryptNotes-edit' note_id=note.id %}" class="btn btn-primary">Edit</a>
+    <a href="{% url 'EncryptNotes-delete' note.id %}" class="btn btn-danger">Delete</a>
+    <a href="{% url 'EncryptNotes-home' %}" class="btn btn-secondary">Cancel</a>
     
-    <a href="{% url 'edit_note' note_id %}" class="btn btn-primary">Edit Note</a>
-    <a href="{% url 'list_notes' %}" class="btn btn-secondary">Back to Notes</a>
 {% endblock content %}

@@ -1,16 +1,44 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from .models import Post
 from .models import Note
 from cryptography.fernet import Fernet
 from .encTools import *
 from .forms import NoteForm
-
+from django.utils.html import strip_tags
 
 def home(request):
-    context = {
-        'posts': Post.objects.all()
-    }
-    return render(request, 'EncryptNotes/home.html', context)
+    if request.user.is_authenticated:
+        # Redirect to the List Notes page if the user is authenticated
+        return redirect('EncryptNotes-list')
+    else:
+        # Redirect to the Login page if the user is not authenticated
+        return redirect('login')
+
+@login_required
+def list(request):
+    user = request.user
+    ukey = decrypt_user_key(request.user.userprofile.encryption_key)
+    print(f"Decryption Key: {ukey}")  # Debugging output
+
+    notes = Note.objects.filter(user=user)
+    noteList = []
+    for note in notes:
+        try:
+            # Decrypt the title and content
+            decrypted_title = decrypt_data(ukey, note.title.encode())
+            decrypted_content = decrypt_data(ukey, note.content.encode())
+            print(f"Decrypted Title: {decrypted_title}, Decrypted Content: {decrypted_content}")  # Debugging output
+
+            # Sanitize the content to remove unwanted tags
+            sanitized_content = strip_tags(decrypted_content)
+            noteList.append({'id': note.id, 'title': decrypted_title, 'content': sanitized_content})
+        except Exception as e:
+            print(f"Error decrypting note {note.id}: {e}")
+            continue
+
+    print(f"Decrypted Notes: {noteList}")
+    return render(request, 'EncryptNotes/list.html', {'notes': noteList})
 
 
 def about(request):
@@ -24,73 +52,98 @@ def create(request):
     if request.method == 'POST':
         form = NoteForm(request.POST)
         if form.is_valid():
+            # Retrieve the user's decryption key
             ukey = decrypt_user_key(request.user.userprofile.encryption_key)
-            print(f"Decryption Key: {ukey}")
+            print(f"Decryption Key: {ukey}")  # Debugging output
+
+            # Get the title and content from the form
             nTitle = form.cleaned_data['title']
             nContent = form.cleaned_data['content']
+            print(f"Original Title: {nTitle}, Original Content: {nContent}")  # Debugging output
+
+            # Encrypt the title and content
             encTitle = encrypt_data(ukey, nTitle).decode()
             encContent = encrypt_data(ukey, nContent).decode()
-            
+            print(f"Encrypted Title: {encTitle}, Encrypted Content: {encContent}")  # Debugging output
+
+            # Save the encrypted data to the database
             Note.objects.create(
-            user = request.user,
-            title = encTitle,
-            content = encContent
+                user=request.user,
+                title=encTitle,
+                content=encContent
             )
-            return redirect('EncryptNotes-list')
+            return redirect('EncryptNotes-home')
     else:
-        #GET request needs an empty note form
         form = NoteForm()
-        
     return render(request, 'EncryptNotes/create.html', {'form': form, 'title': 'Create'})
 
-# Decrypts and lists notes for a logged in user
-def list(request):
-    user = request.user
-    ukey = decrypt_user_key(request.user.userprofile.encryption_key)
-    print(f"Decryption Key: {ukey}")
-    notes = Note.objects.filter(user=user)
-    #noteTitles = [decrypt_data(ukey, note.title) for note in notes]
-    #noteContents = [decrypt_data(ukey, note.content) for note in notes]
-    #noteID = [decrypt_data(ukey, note.id) for note in notes]
-    noteList = [
-        {'id': note.id, 'title': decrypt_data(ukey, note.title.encode()), 'content': decrypt_data(ukey, note.content.encode()) 
-        }
-        for note in notes
-    ]
-    #print(f"Encrypted Title: {note.title}, Encrypted Content: {note.content}")
-    return render(request, 'EncryptNotes/list.html', {'notes': noteList})
-
-# View a specific note
+# Decrypt and view a specific note
 def view(request, note_id):
-    user = request.user  
-    note = Note.objects.get(id=note_id, user=user)  
-    eukey = user.userprofile.encryption_key
-    ukey = decrypt_user_key(eukey)
-    thisTitle = decrypt_data(ukey, note.title.encode())
-    thisNote = decrypt_data(ukey, note.content.encode())
-    #FIX THIS
-    return render(request, 'EncryptNotes/view.html', {'title': thisTitle, 'note': thisNote})
+    note = get_object_or_404(Note, id=note_id, user=request.user)
+    ukey = decrypt_user_key(request.user.userprofile.encryption_key)
+
+    # Decrypt the title and content
+    decrypted_title = decrypt_data(ukey, note.title.encode())
+    decrypted_content = decrypt_data(ukey, note.content.encode())
+    print(f"Decrypted Title: {decrypted_title}, Decrypted Content: {decrypted_content}")  # Debugging output
+
+    # Sanitize the content to remove unwanted tags
+    sanitized_content = strip_tags(decrypted_content)
+
+    return render(request, 'EncryptNotes/view.html', {
+        'title': decrypted_title,
+        'content': sanitized_content,
+        'note': note
+    })
 
 
 # Edit a specific note
 def edit(request, note_id):
-    user = request.user
-    note = Note.objects.get(id=note_id, user=user)
-    ukey = decrypt_user_key(user.userprofile.encryption_key)
+    note = get_object_or_404(Note, id=note_id, user=request.user)
+    ukey = decrypt_user_key(request.user.userprofile.encryption_key)
+
     if request.method == 'POST':
-        form = NoteForm(request.POST)
+        form = NoteForm(request.POST, instance=note)
         if form.is_valid():
-            editedTitle = form.cleaned_data['title']
-            editedContent = form.cleaned_data['content']
-            encTitle = encrypt_data(ukey, editedTitle).decode()
-            encContent = encrypt_data(ukey, editedNote).decode()
-            note.title = encTitle
-            note.content = encContent
+            # Encrypt the updated title and content
+            updated_title = encrypt_data(ukey, form.cleaned_data['title']).decode()
+            updated_content = encrypt_data(ukey, form.cleaned_data['content']).decode()
+            note.title = updated_title
+            note.content = updated_content
             note.save()
-            return redirect('EncryptNotes/list.html')
+            return redirect('EncryptNotes-home')
     else:
-        clearTitle = decrypt_data(ukey, note.title.encode())
-        clearContent = decrypt_data(ukey, note.content.encode())
-        form = NoteForm(initial={'title': clearTitle, 'content': clearContent})
-    
-    return render(request, 'EncryptNotes/edit.html', {'form': form, 'title': 'Edit Note'})
+        # Decrypt the title and content for editing
+        decrypted_title = decrypt_data(ukey, note.title.encode())
+        decrypted_content = decrypt_data(ukey, note.content.encode())
+
+        # Sanitize the content to remove unwanted tags or prefixes
+        sanitized_content = strip_tags(decrypted_content)
+
+        # Pre-fill the form with decrypted and sanitized data
+        form = NoteForm(initial={
+        'title': decrypted_title,
+        'content': sanitized_content
+    })
+
+    return render(request, 'EncryptNotes/edit.html', {'form': form, 'note': note})
+
+# Delete a specific note
+def delete(request, note_id):
+    note = get_object_or_404(Note, id=note_id, user=request.user)
+    ukey = decrypt_user_key(request.user.userprofile.encryption_key)
+    print(f"Decryption Key: {ukey}")  # Debugging output
+
+    # Decrypt the note title for display
+    try:
+        decrypted_title = decrypt_data(ukey, note.title.encode())
+        print(f"Decrypted Title: {decrypted_title}")  # Debugging output
+    except Exception as e:
+        print(f"Error decrypting title for note {note.id}: {e}")
+        decrypted_title = "Error decrypting title"
+
+    if request.method == 'POST':
+        note.delete()
+        return redirect('EncryptNotes-home')
+
+    return render(request, 'EncryptNotes/delete.html', {'note': note, 'decrypted_title': decrypted_title})
