@@ -4,6 +4,7 @@ from cryptography.fernet import Fernet
 from django.conf import settings
 
 #Converts a DJango secret key into a Fernet usable key
+#Returns: Fernet key from DJango secret key
 def convert_DJ_key():
     hash_key = hashlib.sha256(settings.SECRET_KEY.encode()).digest()
     return Fernet(base64.urlsafe_b64encode(hash_key[:32]))
