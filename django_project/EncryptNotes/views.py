@@ -19,7 +19,7 @@ def home(request):
 def list(request):
     user = request.user
     ukey = decrypt_user_key(request.user.userprofile.encryption_key)
-    print(f"Decryption Key: {ukey}")  # Debugging output
+    #print(f"Decryption Key: {ukey}")  # Debugging output
 
     notes = Note.objects.filter(user=user)
     noteList = []
@@ -28,7 +28,7 @@ def list(request):
             # Decrypt the title and content
             decrypted_title = decrypt_data(ukey, note.title.encode())
             decrypted_content = decrypt_data(ukey, note.content.encode())
-            print(f"Decrypted Title: {decrypted_title}, Decrypted Content: {decrypted_content}")  # Debugging output
+            #print(f"Decrypted Title: {decrypted_title}, Decrypted Content: {decrypted_content}")  # Debugging output
 
             # Sanitize the content to remove unwanted tags
             sanitized_content = strip_tags(decrypted_content)
@@ -37,7 +37,7 @@ def list(request):
             print(f"Error decrypting note {note.id}: {e}")
             continue
 
-    print(f"Decrypted Notes: {noteList}")
+    #print(f"Decrypted Notes: {noteList}")
     return render(request, 'EncryptNotes/list.html', {'notes': noteList})
 
 
@@ -54,17 +54,17 @@ def create(request):
         if form.is_valid():
             # Retrieve the user's decryption key
             ukey = decrypt_user_key(request.user.userprofile.encryption_key)
-            print(f"Decryption Key: {ukey}")  # Debugging output
+            #print(f"Decryption Key: {ukey}")  # Debugging output
 
             # Get the title and content from the form
             nTitle = form.cleaned_data['title']
             nContent = form.cleaned_data['content']
-            print(f"Original Title: {nTitle}, Original Content: {nContent}")  # Debugging output
+            #print(f"Original Title: {nTitle}, Original Content: {nContent}")  # Debugging output
 
             # Encrypt the title and content
             encTitle = encrypt_data(ukey, nTitle).decode()
             encContent = encrypt_data(ukey, nContent).decode()
-            print(f"Encrypted Title: {encTitle}, Encrypted Content: {encContent}")  # Debugging output
+            #print(f"Encrypted Title: {encTitle}, Encrypted Content: {encContent}")  # Debugging output
 
             # Save the encrypted data to the database
             Note.objects.create(
@@ -85,7 +85,7 @@ def view(request, note_id):
     # Decrypt the title and content
     decrypted_title = decrypt_data(ukey, note.title.encode())
     decrypted_content = decrypt_data(ukey, note.content.encode())
-    print(f"Decrypted Title: {decrypted_title}, Decrypted Content: {decrypted_content}")  # Debugging output
+    #print(f"Decrypted Title: {decrypted_title}, Decrypted Content: {decrypted_content}")  # Debugging output
 
     # Sanitize the content to remove unwanted tags
     sanitized_content = strip_tags(decrypted_content)
@@ -132,12 +132,12 @@ def edit(request, note_id):
 def delete(request, note_id):
     note = get_object_or_404(Note, id=note_id, user=request.user)
     ukey = decrypt_user_key(request.user.userprofile.encryption_key)
-    print(f"Decryption Key: {ukey}")  # Debugging output
+    #print(f"Decryption Key: {ukey}")  # Debugging output
 
     # Decrypt the note title for display
     try:
         decrypted_title = decrypt_data(ukey, note.title.encode())
-        print(f"Decrypted Title: {decrypted_title}")  # Debugging output
+        #print(f"Decrypted Title: {decrypted_title}")  # Debugging output
     except Exception as e:
         print(f"Error decrypting title for note {note.id}: {e}")
         decrypted_title = "Error decrypting title"
