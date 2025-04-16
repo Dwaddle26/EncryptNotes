@@ -1,0 +1,10 @@
+Phase 4
+- Finish Change Log and Lessons Learned Documents
+- Create Phase 4 Presentation
+ --Remember that it is for a general audience/stakeholder.  No advanced technical things and only very basic diagrams showing basic overview (Django talks to MySQL database, etc).
+- Finish AI note organization, currently working on this (Jacob)
+- Align text with note lines on front end (KJ) 
+- Bug test once AI note organization is finished, squash any bugs (everyone)
+Last phase
+- Begin figuring out three minute video for final.
+ -- What do we want to show in it?  Will each member narrate a slide or two, then I can put it all together in a video with powerpoint slides?
