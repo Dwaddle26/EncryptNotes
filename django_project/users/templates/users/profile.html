@@ -12,9 +12,6 @@
 	  <hr>
 	  <a href="{% url 'password_change' %}" class="btn btn-primary">Change Password</a>
       <hr>
-	  <form method="POST" action="{% url 'delete_user' %}">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-danger">Delete Account</button>
-      </form>
+	  <a href="{% url 'delete_user' %}" class="btn btn-danger">Delete Account</a>
     </div>
 {% endblock content %}

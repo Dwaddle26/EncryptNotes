@@ -32,3 +32,4 @@ def delete_user(request):
         user.delete()
         logout(request)
         return redirect('login')
+    return render(request, 'users/delete_user_confirm.html')

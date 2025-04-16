@@ -1,0 +1,12 @@
+{% extends "EncryptNotes/base.html" %}
+{% block content %}
+    <div class="content-section">
+        <h1>Delete Account</h1>
+        <p>Are you sure? This is the point of no return. </p>
+        <form method="POST" action="{% url 'delete_user' %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Yes</button>
+            <a href="{% url 'profile' %}" class="btn btn-secondary">No</a>
+        </form>
+    </div>
+{% endblock content %}
