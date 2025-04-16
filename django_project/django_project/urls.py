@@ -4,6 +4,8 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from users import views as user_views
+from django.contrib.auth.views import PasswordChangeView, PasswordChangeDoneView
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -14,9 +16,11 @@ urlpatterns = [
     path('', include('EncryptNotes.urls')),
     path("", include('social_django.urls', namespace='social')),
     path('tinymce/', include('tinymce.urls')),
-
-    
+    path('delete_user/', user_views.delete_user, name='delete_user'),
+    path('password_change/', PasswordChangeView.as_view(template_name='users/password_change_form.html'), name='password_change'),
+    path('password_change/done/',PasswordChangeDoneView.as_view(template_name='users/password_change_done.html'),name='password_change_done'),
 ]
+
 
 
 if settings.DEBUG:

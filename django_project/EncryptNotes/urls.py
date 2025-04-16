@@ -10,6 +10,5 @@ urlpatterns = [
     path('edit/<int:note_id>', views.edit, name='EncryptNotes-edit'),
     path('view/<int:note_id>/', views.view, name='EncryptNotes-view'),
     path('delete/<int:note_id>/', views.delete, name='EncryptNotes-delete'),
-    path('tinymce/', include('tinymce.urls'))
-
+    path('tinymce/', include('tinymce.urls')),
 ]

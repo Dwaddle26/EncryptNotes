@@ -3,6 +3,9 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm
 from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth import logout
+from django.shortcuts import redirect
+from django.contrib.auth.models import User
 
 def register(request):
     if request.method == 'POST':
@@ -20,3 +23,12 @@ def register(request):
 @login_required
 def profile(request):
     return render(request, 'users/profile.html')
+
+
+@login_required
+def delete_user(request):
+    if request.method == "POST":
+        user = request.user
+        user.delete()
+        logout(request)
+        return redirect('login')

@@ -9,6 +9,12 @@
           <p class="text-secondary">Email: {{ user.email }}</p>
         </div>
       </div>
-      <!-- FORM HERE -->
+	  <hr>
+	  <a href="{% url 'password_change' %}" class="btn btn-primary">Change Password</a>
+      <hr>
+	  <form method="POST" action="{% url 'delete_user' %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Delete Account</button>
+      </form>
     </div>
 {% endblock content %}
