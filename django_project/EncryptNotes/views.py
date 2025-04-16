@@ -65,12 +65,17 @@ def create(request):
             encTitle = encrypt_data(ukey, nTitle).decode()
             encContent = encrypt_data(ukey, nContent).decode()
             #print(f"Encrypted Title: {encTitle}, Encrypted Content: {encContent}")  # Debugging output
-
-            # Save the encrypted data to the database
+            
+            categorized = form.cleaned_data.get('categorized', False)
+            category = None 
+            if categorized:
+                category = categorize_note(nContent)
+                
             Note.objects.create(
                 user=request.user,
                 title=encTitle,
                 content=encContent
+                category=category
             )
             return redirect('EncryptNotes-home')
     else:
@@ -117,7 +122,6 @@ def edit(request, note_id):
         decrypted_title = decrypt_data(ukey, note.title.encode())
         decrypted_content = decrypt_data(ukey, note.content.encode())
 
-        # Sanitize the content to remove unwanted tags or prefixes
         sanitized_content = strip_tags(decrypted_content)
 
         # Pre-fill the form with decrypted and sanitized data

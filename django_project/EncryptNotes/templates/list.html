@@ -5,7 +5,10 @@
     <ul class="note-list">
         {% for note in notes %}
             <li class="note-item">
-                <strong>{{ note.title }}</strong><br>
+                <strong>{{ note.title }}</strong>
+				{% if note.category and note.categorized %} 
+					(Category: {{ note.category }})
+				{% endif %}<br>
                 <p>{{ note.content|truncatechars:100 }}</p>
                 <a href="{% url 'EncryptNotes-view' note.id %}">View</a>
                 <a href="{% url 'EncryptNotes-edit' note.id %}">Edit</a>
