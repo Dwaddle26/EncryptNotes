@@ -6,6 +6,7 @@ from EncryptNotes.models import Note
 class NoteForm(forms.ModelForm):
     title = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Enter a title'}))
     content = forms.CharField(widget=TinyMCE(attrs={'cols': 80, 'rows': 30}))
+    categorized = forms.BooleanField(required=False, initial=False)
     class Meta:
         model = Note
         fields = ['title', 'content']

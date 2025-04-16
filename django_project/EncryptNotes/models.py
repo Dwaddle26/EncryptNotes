@@ -17,12 +17,15 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
-# Note class, this is a Note
+# Note class
 class Note(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.TextField()
     content = HTMLField()
     created_at = models.DateTimeField(auto_now_add=True)
+    # New fields for optional AI categorization
+    category = models.CharField(max_length=50, blank=True, null=True)
+    categorized = models.BooleanField(default=False)
     
     def __str__(self):
         return f"{self.title} Note by {self.user.username} - Created on {self.created_at}"

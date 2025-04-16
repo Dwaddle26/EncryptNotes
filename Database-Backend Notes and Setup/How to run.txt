@@ -3,7 +3,7 @@ How to run?
 Install Python to your PC
 
 Open command prompt, and pip install all these dependencies
-django, crispy, crispy-bootstrap4, mysqlclient, django-tinymce, fernet, cryptography, pyenchant, social-auth-app-django
+django, crispy, crispy-bootstrap4, mysqlclient, django-tinymce, fernet, cryptography, pyenchant, social-auth-app-django, google-cloud-language
 
 Install mySQL 8.0 server AND workbench.  
 Setup root account with password toor
