@@ -6,6 +6,7 @@ from cryptography.fernet import Fernet
 from .encTools import *
 from .forms import NoteForm
 from django.utils.html import strip_tags
+from .aiTools import *
 
 def home(request):
     if request.user.is_authenticated:
@@ -106,15 +107,18 @@ def view(request, note_id):
 def edit(request, note_id):
     note = get_object_or_404(Note, id=note_id, user=request.user)
     ukey = decrypt_user_key(request.user.userprofile.encryption_key)
-
+    categorization = form.cleaned_data.get('categorized', False)
+    
     if request.method == 'POST':
         form = NoteForm(request.POST, instance=note)
         if form.is_valid():
             # Encrypt the updated title and content
             updated_title = encrypt_data(ukey, form.cleaned_data['title']).decode()
             updated_content = encrypt_data(ukey, form.cleaned_data['content']).decode()
+            
             note.title = updated_title
             note.content = updated_content
+            note.categorized = categorization
             note.save()
             return redirect('EncryptNotes-home')
     else:
@@ -128,6 +132,7 @@ def edit(request, note_id):
         form = NoteForm(initial={
         'title': decrypted_title,
         'content': sanitized_content
+        'categorized': 
     })
 
     return render(request, 'EncryptNotes/edit.html', {'form': form, 'note': note})
