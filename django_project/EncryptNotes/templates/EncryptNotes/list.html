@@ -6,10 +6,15 @@
     <ul class="note-list">
         {% for note in notes %}
             <li class="note-item notebook-page">
-                <!-- Make the title a clickable link -->
                 <a href="{% url 'EncryptNotes-view' note.id %}" class="note-title">
                     <strong>{{ note.title }}</strong>
                 </a>
+                {% if note.categorized and note.category %}
+                    <!-- Make category clickable -->
+                    <a href="{% url 'EncryptNotes-category' note.category %}" class="note-category">
+                        ({{ note.category }})
+                    </a>
+                {% endif %}
             </li>
         {% empty %}
             <p>No notes found.</p>

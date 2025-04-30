@@ -13,6 +13,10 @@
             <label for="id_content">Content:</label>
             {{ form.content }}
         </div>
+		<div class="form-group">
+			<label for="id_categorized">Enable Categorization:</label>
+			{{ form.categorized }}
+		</div>
         <button type="submit" class="btn btn-primary">Save Note</button>
         <a href="{% url 'EncryptNotes-home' %}" class="btn btn-secondary">Cancel</a>
     </form>

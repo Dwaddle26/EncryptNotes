@@ -24,7 +24,7 @@ class Note(models.Model):
     content = HTMLField()
     created_at = models.DateTimeField(auto_now_add=True)
     # New fields for optional AI categorization
-    category = models.CharField(max_length=50, blank=True, null=True)
+    category = models.CharField(max_length=255, blank=True, null=True)
     categorized = models.BooleanField(default=False)
     
     def __str__(self):
