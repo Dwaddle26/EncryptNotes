@@ -33,7 +33,18 @@ def list(request):
 
             # Sanitize the content to remove unwanted tags
             sanitized_content = strip_tags(decrypted_content)
-            noteList.append({'id': note.id, 'title': decrypted_title, 'content': sanitized_content})
+            
+            if note.categorized 
+                category = note.category 
+            else 
+                category = None
+
+            noteList.append({
+            'id': note.id, 
+            'title': decrypted_title, 
+            'content': sanitized_content
+            'category': category
+            })
         except Exception as e:
             print(f"Error decrypting note {note.id}: {e}")
             continue
@@ -67,7 +78,7 @@ def create(request):
             encContent = encrypt_data(ukey, nContent).decode()
             #print(f"Encrypted Title: {encTitle}, Encrypted Content: {encContent}")  # Debugging output
             
-            categorized = form.cleaned_data.get('categorized', False)
+            categorized = form.cleaned_data.get('categorized')
             category = None 
             if categorized:
                 category = categorize_note(nContent)
@@ -77,6 +88,7 @@ def create(request):
                 title=encTitle,
                 content=encContent
                 category=category
+                categorized=categorized
             )
             return redirect('EncryptNotes-home')
     else:
@@ -107,7 +119,7 @@ def view(request, note_id):
 def edit(request, note_id):
     note = get_object_or_404(Note, id=note_id, user=request.user)
     ukey = decrypt_user_key(request.user.userprofile.encryption_key)
-    categorization = form.cleaned_data.get('categorized', False)
+    categorization = form.cleaned_data.get('categorized')
     
     if request.method == 'POST':
         form = NoteForm(request.POST, instance=note)
@@ -119,20 +131,25 @@ def edit(request, note_id):
             note.title = updated_title
             note.content = updated_content
             note.categorized = categorization
+            if categorization:
+                note.category = categorize_note(form.cleaned_data['content'].decode())
+            else:
+                note.category = None
+                
             note.save()
             return redirect('EncryptNotes-home')
     else:
         # Decrypt the title and content for editing
         decrypted_title = decrypt_data(ukey, note.title.encode())
         decrypted_content = decrypt_data(ukey, note.content.encode())
-
+        
         sanitized_content = strip_tags(decrypted_content)
 
         # Pre-fill the form with decrypted and sanitized data
         form = NoteForm(initial={
         'title': decrypted_title,
         'content': sanitized_content
-        'categorized': 
+        'categorized': note.categorized
     })
 
     return render(request, 'EncryptNotes/edit.html', {'form': form, 'note': note})
