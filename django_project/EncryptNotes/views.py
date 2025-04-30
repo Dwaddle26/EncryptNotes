@@ -34,15 +34,15 @@ def list(request):
             # Sanitize the content to remove unwanted tags
             sanitized_content = strip_tags(decrypted_content)
             
-            if note.categorized 
+            if note.categorized:
                 category = note.category 
-            else 
+            else:
                 category = None
 
             noteList.append({
             'id': note.id, 
             'title': decrypted_title, 
-            'content': sanitized_content
+            'content': sanitized_content,
             'category': category
             })
         except Exception as e:
@@ -86,8 +86,8 @@ def create(request):
             Note.objects.create(
                 user=request.user,
                 title=encTitle,
-                content=encContent
-                category=category
+                content=encContent,
+                category=category,
                 categorized=categorized
             )
             return redirect('EncryptNotes-home')
@@ -148,7 +148,7 @@ def edit(request, note_id):
         # Pre-fill the form with decrypted and sanitized data
         form = NoteForm(initial={
         'title': decrypted_title,
-        'content': sanitized_content
+        'content': sanitized_content,
         'categorized': note.categorized
     })
 
