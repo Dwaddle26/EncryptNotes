@@ -15,6 +15,12 @@ def home(request):
     else:
         # Redirect to the Login page if the user is not authenticated
         return redirect('login')
+        
+def about(request):
+    return render(request, 'EncryptNotes/about.html', {'title': 'About'})
+    
+def announcements(request):
+    return render(request, 'EncryptNotes/announcements.html', {'title': 'announcements'})
 
 @login_required
 def list(request):
@@ -51,13 +57,28 @@ def list(request):
 
     #print(f"Decrypted Notes: {noteList}")
     return render(request, 'EncryptNotes/list.html', {'notes': noteList})
-
-
-def about(request):
-    return render(request, 'EncryptNotes/about.html', {'title': 'About'})
     
-def announcements(request):
-    return render(request, 'EncryptNotes/announcements.html', {'title': 'announcements'})
+#Lists notes by category
+def category_list(request, category):
+    user = request.user
+    ukey = decrypt_user_key(user.userprofile.encryption_key)
+
+    # Retrieve notes that match the selected category
+    notes = Note.objects.filter(user=user, category=category)
+
+    noteList = []
+    for note in notes:
+        try:
+            decrypted_title = decrypt_data(ukey, note.title.encode())
+            decrypted_content = decrypt_data(ukey, note.content.encode())
+            sanitized_content = strip_tags(decrypted_content)
+
+            noteList.append({'id': note.id, 'title': decrypted_title, 'content': sanitized_content, 'category': category})
+        except Exception as e:
+            print(f"Error decrypting note {note.id}: {e}")
+            continue
+
+    return render(request, 'EncryptNotes/category_list.html', {'notes': noteList, 'category': category})
 
 # Creates a note, encrypts it, saves to database
 def create(request):
