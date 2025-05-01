@@ -9,11 +9,14 @@
                 <a href="{% url 'EncryptNotes-view' note.id %}" class="note-title">
                     <strong>{{ note.title }}</strong>
                 </a>
-                {% if note.categorized and note.category %}
+                {% if note.category %}
                     <!-- Make category clickable -->
                     <a href="{% url 'EncryptNotes-category' note.category %}" class="note-category">
                         ({{ note.category }})
                     </a>
+				{% else %}
+					<span class="note-category"> (Uncategorized) </span>
+
                 {% endif %}
             </li>
         {% empty %}

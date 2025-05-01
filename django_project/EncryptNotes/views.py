@@ -43,7 +43,7 @@ def list(request):
             if note.categorized:
                 category = note.category 
             else:
-                category = None
+                category = "Uncategorized"
 
             noteList.append({
             'id': note.id, 
