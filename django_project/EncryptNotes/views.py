@@ -40,7 +40,7 @@ def list(request):
             # Sanitize the content to remove unwanted tags
             sanitized_content = strip_tags(decrypted_content)
             
-            if note.categorized:
+            if note.category:
                 category = note.category 
             else:
                 category = "Uncategorized"
@@ -149,6 +149,8 @@ def edit(request, note_id):
         form = NoteForm(request.POST, instance=note)
         if form.is_valid():
             categorization = form.cleaned_data.get('categorized', False)
+            userCat = form.cleaned_data.get('category', '').strip()
+            print(userCat)
             # Encrypt the updated title and content
             updated_title = encrypt_data(ukey, form.cleaned_data['title']).decode()
             updated_content = encrypt_data(ukey, form.cleaned_data['content']).decode()
@@ -156,10 +158,11 @@ def edit(request, note_id):
             note.title = updated_title
             note.content = updated_content
             note.categorized = categorization
+            
+            note.category = userCat if userCat else None
+
             if categorization:
-                note.category = categorize_note(form.cleaned_data['content'].decode())
-            else:
-                note.category = None
+                note.category = categorize_note(form.cleaned_data['content'])
                 
             note.save()
             return redirect('EncryptNotes-home')
@@ -174,7 +177,8 @@ def edit(request, note_id):
         form = NoteForm(initial={
         'title': decrypted_title,
         'content': sanitized_content,
-        'categorized': note.categorized
+        'categorized': note.categorized,
+        'category': note.category
     })
 
     return render(request, 'EncryptNotes/edit.html', {'form': form, 'note': note})
