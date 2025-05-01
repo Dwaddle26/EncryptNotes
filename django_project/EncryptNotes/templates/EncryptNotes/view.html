@@ -1,13 +1,27 @@
 {% extends "EncryptNotes/base.html" %}
 
 {% block content %}
-    <div class="notebook-page">
-        <h1>{{ title }}</h1>
-        <hr>
-        <p>{{ content }}</p>
-    </div>
-    <a href="{% url 'EncryptNotes-edit' note_id=note.id %}" class="btn btn-primary">Edit</a>
-    <a href="{% url 'EncryptNotes-delete' note.id %}" class="btn btn-danger">Delete</a>
-    <a href="{% url 'EncryptNotes-home' %}" class="btn btn-secondary">Cancel</a>
+    <h1>View Note</h1>
+    <hr>
     
+    <div class="notebook-page">
+        <label><strong>{{ title }}</strong></label>
+        <p></p>
+        <textarea id="note-content">{{ content }}</textarea>
+    </div>
+
+    <a href="{% url 'EncryptNotes-home' %}" class="btn btn-secondary">Back</a>
+    <a href="{% url 'EncryptNotes-edit' note.id %}" class="btn btn-primary">Edit</a>
+
+    
+    <script src="https://cdn.tiny.cloud/1/77imh3r0wkiucf1epdh85cswmo23a6lehp5mbfyarmtwrf8g/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+            selector: '#note-content',
+            menubar: false,
+            toolbar: false,
+            readonly: true,
+            plugins: 'lists link image table',
+        });
+    </script>
 {% endblock content %}

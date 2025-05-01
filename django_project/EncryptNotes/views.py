@@ -1,12 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .models import Post
-from .models import Note
+from .models import Post, Note
 from cryptography.fernet import Fernet
 from .encTools import *
 from .forms import NoteForm
 from django.utils.html import strip_tags
 from .aiTools import *
+import html
 
 def home(request):
     if request.user.is_authenticated:
@@ -130,11 +130,11 @@ def view(request, note_id):
     #print(f"Decrypted Title: {decrypted_title}, Decrypted Content: {decrypted_content}")  # Debugging output
 
     # Sanitize the content to remove unwanted tags
-    sanitized_content = strip_tags(decrypted_content)
+    
 
     return render(request, 'EncryptNotes/view.html', {
         'title': decrypted_title,
-        'content': sanitized_content,
+        'content': decrypted_content,
         'note': note
     })
 
@@ -144,7 +144,6 @@ def edit(request, note_id):
     note = get_object_or_404(Note, id=note_id, user=request.user)
     ukey = decrypt_user_key(request.user.userprofile.encryption_key)
     
-    
     if request.method == 'POST':
         form = NoteForm(request.POST, instance=note)
         if form.is_valid():
@@ -153,7 +152,7 @@ def edit(request, note_id):
             print(userCat)
             # Encrypt the updated title and content
             updated_title = encrypt_data(ukey, form.cleaned_data['title']).decode()
-            updated_content = encrypt_data(ukey, form.cleaned_data['content']).decode()
+            updated_content = encrypt_data(ukey, request.POST.get('content', '')).decode()
             
             note.title = updated_title
             note.content = updated_content
@@ -171,12 +170,10 @@ def edit(request, note_id):
         decrypted_title = decrypt_data(ukey, note.title.encode())
         decrypted_content = decrypt_data(ukey, note.content.encode())
         
-        sanitized_content = strip_tags(decrypted_content)
-
         # Pre-fill the form with decrypted and sanitized data
         form = NoteForm(initial={
         'title': decrypted_title,
-        'content': sanitized_content,
+        'content': decrypted_content,
         'categorized': note.categorized,
         'category': note.category
     })

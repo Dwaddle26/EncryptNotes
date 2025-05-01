@@ -10,16 +10,13 @@
             {{ form.title }}
         </div>
         <div class="form-group">
-            {{ form.content.label_tag }}
-            {{ form.content }}
+            <textarea id="note-content">{{ form.content.value }}</textarea>
         </div>
 		<div class="form-group">
-        <!-- Categorization Checkbox -->
 			<label for="id_categorized">Enable Categorization:</label>
 			{{ form.categorized }}
 		</div>
 		<div class="form-group">
-        <!-- Manual Category Entry -->
 			<label for="id_category">Category (optional):</label>
 			{{ form.category }}
 		</div>
@@ -27,4 +24,15 @@
         <a href="{% url 'EncryptNotes-home' %}" class="btn btn-secondary">Cancel</a>
         <a href="{% url 'EncryptNotes-delete' note.id %}" class="btn btn-danger">Delete</a>
     </form>
+	
+	 <script src="https://cdn.tiny.cloud/1/77imh3r0wkiucf1epdh85cswmo23a6lehp5mbfyarmtwrf8g/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+            selector: '#note-content',
+            plugins: 'lists link image table',
+            toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | bullist numlist outdent indent',
+            menubar: false
+        });
+    </script>
+
 {% endblock content %}
