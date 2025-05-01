@@ -152,7 +152,7 @@ def edit(request, note_id):
             print(userCat)
             # Encrypt the updated title and content
             updated_title = encrypt_data(ukey, form.cleaned_data['title']).decode()
-            updated_content = encrypt_data(ukey, request.POST.get('content', '')).decode()
+            updated_content = encrypt_data(ukey, form.cleaned_data['content']).decode()
             
             note.title = updated_title
             note.content = updated_content
