@@ -100,9 +100,12 @@ def create(request):
             #print(f"Encrypted Title: {encTitle}, Encrypted Content: {encContent}")  # Debugging output
             
             categorized = form.cleaned_data.get('categorized')
-            category = None 
+            
             if categorized:
                 category = categorize_note(nContent)
+                print(nContent) #DEBUGGING ONLY
+            else:
+                category = None
                 
             Note.objects.create(
                 user=request.user,
