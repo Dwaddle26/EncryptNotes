@@ -26,6 +26,5 @@ class Note(models.Model):
     # New fields for optional AI categorization
     category = models.CharField(max_length=255, blank=True, null=True)
     categorized = models.BooleanField(default=False)
-    
     def __str__(self):
         return f"{self.title} Note by {self.user.username} - Created on {self.created_at}"

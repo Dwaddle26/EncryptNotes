@@ -14,18 +14,14 @@ def categorize_note(content):
     
     #Prevent uneccessary API calls
     if len(cleanContent.split()) < 20:
-        #print(cleanContent.split())
         return "Uncategorized"
-        
-        
+    
     document = language_v1.Document(
         content=cleanContent,
         type_=language_v1.Document.Type.PLAIN_TEXT
     )
     response = client.classify_text(request={"document": document})
     if response.categories:
-        #print("Category Detected:", response.categories[0].name) #debugging output
         return (response.categories[0].name).lstrip("/")
     else:
-        #print("No category detected.") #Debugging output
         return "Uncategorized"

@@ -26,8 +26,6 @@ def announcements(request):
 def list(request):
     user = request.user
     ukey = decrypt_user_key(request.user.userprofile.encryption_key)
-    #print(f"Decryption Key: {ukey}")  # Debugging output
-
     notes = Note.objects.filter(user=user)
     noteList = []
     for note in notes:
@@ -35,16 +33,12 @@ def list(request):
             # Decrypt the title and content
             decrypted_title = decrypt_data(ukey, note.title.encode())
             decrypted_content = decrypt_data(ukey, note.content.encode())
-            #print(f"Decrypted Title: {decrypted_title}, Decrypted Content: {decrypted_content}")  # Debugging output
-
             # Sanitize the content to remove unwanted tags
             sanitized_content = strip_tags(decrypted_content)
-            
             if note.category:
                 category = note.category 
             else:
                 category = "Uncategorized"
-
             noteList.append({
             'id': note.id, 
             'title': decrypted_title, 
@@ -62,17 +56,14 @@ def list(request):
 def category_list(request, category):
     user = request.user
     ukey = decrypt_user_key(user.userprofile.encryption_key)
-
     # Retrieve notes that match the selected category
     notes = Note.objects.filter(user=user, category=category)
-
     noteList = []
     for note in notes:
         try:
             decrypted_title = decrypt_data(ukey, note.title.encode())
             decrypted_content = decrypt_data(ukey, note.content.encode())
             sanitized_content = strip_tags(decrypted_content)
-
             noteList.append({'id': note.id, 'title': decrypted_title, 'content': sanitized_content, 'category': category})
         except Exception as e:
             print(f"Error decrypting note {note.id}: {e}")
@@ -87,26 +78,18 @@ def create(request):
         if form.is_valid():
             # Retrieve the user's decryption key
             ukey = decrypt_user_key(request.user.userprofile.encryption_key)
-            #print(f"Decryption Key: {ukey}")  # Debugging output
-
             # Get the title and content from the form
             nTitle = form.cleaned_data['title']
             nContent = form.cleaned_data['content']
-            #print(f"Original Title: {nTitle}, Original Content: {nContent}")  # Debugging output
-
             # Encrypt the title and content
             encTitle = encrypt_data(ukey, nTitle).decode()
             encContent = encrypt_data(ukey, nContent).decode()
-            #print(f"Encrypted Title: {encTitle}, Encrypted Content: {encContent}")  # Debugging output
-            
             categorized = form.cleaned_data.get('categorized')
-            
+            # Use AI to categorize note if enabled
             if categorized:
                 category = categorize_note(nContent)
-                print(nContent) #DEBUGGING ONLY
             else:
                 category = None
-                
             Note.objects.create(
                 user=request.user,
                 title=encTitle,
@@ -123,21 +106,14 @@ def create(request):
 def view(request, note_id):
     note = get_object_or_404(Note, id=note_id, user=request.user)
     ukey = decrypt_user_key(request.user.userprofile.encryption_key)
-
     # Decrypt the title and content
     decrypted_title = decrypt_data(ukey, note.title.encode())
     decrypted_content = decrypt_data(ukey, note.content.encode())
-    #print(f"Decrypted Title: {decrypted_title}, Decrypted Content: {decrypted_content}")  # Debugging output
-
-    # Sanitize the content to remove unwanted tags
-    
-
     return render(request, 'EncryptNotes/view.html', {
         'title': decrypted_title,
         'content': decrypted_content,
         'note': note
     })
-
 
 # Edit a specific note
 def edit(request, note_id):
@@ -153,16 +129,14 @@ def edit(request, note_id):
             # Encrypt the updated title and content
             updated_title = encrypt_data(ukey, form.cleaned_data['title']).decode()
             updated_content = encrypt_data(ukey, form.cleaned_data['content']).decode()
-            
             note.title = updated_title
             note.content = updated_content
             note.categorized = categorization
-            
+            #Allow manual user entry of category
             note.category = userCat if userCat else None
-
+            #Categorize note with AI if enabled
             if categorization:
                 note.category = categorize_note(form.cleaned_data['content'])
-                
             note.save()
             return redirect('EncryptNotes-home')
     else:
@@ -170,26 +144,22 @@ def edit(request, note_id):
         decrypted_title = decrypt_data(ukey, note.title.encode())
         decrypted_content = decrypt_data(ukey, note.content.encode())
         
-        # Pre-fill the form with decrypted and sanitized data
+        # Pre-fill the form with decrypted data
         form = NoteForm(initial={
         'title': decrypted_title,
         'content': decrypted_content,
         'categorized': note.categorized,
         'category': note.category
     })
-
     return render(request, 'EncryptNotes/edit.html', {'form': form, 'note': note})
 
 # Delete a specific note
 def delete(request, note_id):
     note = get_object_or_404(Note, id=note_id, user=request.user)
     ukey = decrypt_user_key(request.user.userprofile.encryption_key)
-    #print(f"Decryption Key: {ukey}")  # Debugging output
-
     # Decrypt the note title for display
     try:
         decrypted_title = decrypt_data(ukey, note.title.encode())
-        #print(f"Decrypted Title: {decrypted_title}")  # Debugging output
     except Exception as e:
         print(f"Error decrypting title for note {note.id}: {e}")
         decrypted_title = "Error decrypting title"

@@ -9,7 +9,7 @@ def convert_DJ_key():
     hash_key = hashlib.sha256(settings.SECRET_KEY.encode()).digest()
     return Fernet(base64.urlsafe_b64encode(hash_key[:32]))
 
-# encrypt a user's key with DJango's secret key
+#Encrypt a user's key with DJango's secret key
 #ukey: the user's key
 #Returns: encrypted user key
 def encrypt_user_key(ukey):
@@ -19,7 +19,7 @@ def encrypt_user_key(ukey):
     return f.encrypt(ukey)
     
 
-# decrypt a user's key with DJango's secret key
+#Decrypt a user's key with DJango's secret key
 #ukey: the user's key
 #Returns: decrypted user key
 def decrypt_user_key(ukey):
@@ -41,7 +41,6 @@ def encrypt_data(key, info):
     f = Fernet(key)
     if isinstance(info, str):
         info = info.encode()
-    
     return f.encrypt(info)
 
 #Decrypts data with Fernet
