@@ -25,3 +25,10 @@ Later can use separate account for Django to access DB
 CREATE USER 'EnotesApp'@'localhost' IDENTIFIED BY 'T1?_6£SPt-3%';
 GRANT ALL PRIVILEGES ON enotes.* TO 'EnotesApp'@'localhost' WITH GRANT OPTION;
 */
+
+Categorization setup,
+Create Google Cloud Account, you must enter credit card details to create an account.  They will not charge you.  Go into cloud dashboard and setup natural language API
+https://console.cloud.google.com/marketplace/product/google/language.googleapis.com?q=search&referrer=search
+Click "Manage" button credentials tab, open the service account.  Service account must have editor access.  Select keys tab, add a json key, download it.
+Rename to mykey.json move it to GitHub\Project1\django_project\EncryptNotes
+Now organization will work
