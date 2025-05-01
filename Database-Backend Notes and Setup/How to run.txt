@@ -16,19 +16,20 @@ ATEST123
 A@A.COM
 idkpass2025
 
--- Researched how to get https (instead of insecure http) for the app.  Not easy just running it for development testing.  In one of the presentations, we need to point out that in reality we'd use Let's Encrypt and certbot
-https://stackoverflow.com/questions/50019769/using-letsencrypt-certbot-with-django-dev-server
-https://stackoverflow.com/questions/8023126/how-can-i-test-https-connections-with-django-as-easily-as-i-can-non-https-connec
-
 Later can use separate account for Django to access DB
 /* will use in release version for more control
 CREATE USER 'EnotesApp'@'localhost' IDENTIFIED BY 'T1?_6£SPt-3%';
 GRANT ALL PRIVILEGES ON enotes.* TO 'EnotesApp'@'localhost' WITH GRANT OPTION;
 */
 
-Categorization setup,
+
+	Categorization setup:
 Create Google Cloud Account, you must enter credit card details to create an account.  They will not charge you.  Go into cloud dashboard and setup natural language API
 https://console.cloud.google.com/marketplace/product/google/language.googleapis.com?q=search&referrer=search
 Click "Manage" button credentials tab, open the service account.  Service account must have editor access.  Select keys tab, add a json key, download it.
 Rename to mykey.json move it to GitHub\Project1\django_project\EncryptNotes
-Now organization will work
+
+Now, login, create a note and use the following copypasta:
+"Artificial Intelligence is revolutionizing industries by automating processes, analyzing vast amounts of data, and improving decision-making. Businesses use AI-powered tools for customer service, fraud detection, medical diagnosis, and personalized recommendations. The future of AI includes advancements in natural language processing, autonomous systems, and ethical considerations for responsible AI deployment."
+
+This should return a category of "Computers & Electronics"

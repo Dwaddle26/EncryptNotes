@@ -143,11 +143,12 @@ def view(request, note_id):
 def edit(request, note_id):
     note = get_object_or_404(Note, id=note_id, user=request.user)
     ukey = decrypt_user_key(request.user.userprofile.encryption_key)
-    categorization = form.cleaned_data.get('categorized')
+    
     
     if request.method == 'POST':
         form = NoteForm(request.POST, instance=note)
         if form.is_valid():
+            categorization = form.cleaned_data.get('categorized', False)
             # Encrypt the updated title and content
             updated_title = encrypt_data(ukey, form.cleaned_data['title']).decode()
             updated_content = encrypt_data(ukey, form.cleaned_data['content']).decode()
