@@ -1,2 +1,2 @@
 # EncryptNotes
-EncryptNotes is a secure and user-friendly note-taking application built with Django and Python that prioritizes privacy. Users can store personal notes and sensitive information with peace of mind, knowing that only they can access their data.
+Created in Spring 2025 by CPT-200 Team 2, EncryptNotes is a secure and user-friendly note-taking application built with Django and Python that prioritizes privacy. Users can store personal notes and sensitive information with peace of mind, knowing that only they can access their data.
