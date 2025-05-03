@@ -1,0 +1,3 @@
+This document is meant as a guide and a way to know or see how we saw it. Basically making it easy for others after us to know what's what and what things mean. So, for this it's a folder containing diagrams that we used for the this phase's presentation and the files of the diagrams, so if you either have the correct software or have some software that can present it or use it then you can see the diagram and actually mess with it.
+
+-Duncan Waddle, Team Lead/Manager
