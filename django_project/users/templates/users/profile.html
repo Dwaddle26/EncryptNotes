@@ -2,16 +2,14 @@
 {% load crispy_forms_tags %}
 {% block content %}
     <div class="content-section">
-	 <h1 class="account-heading">User Profile</h1>
+	 <h2 class="account-heading">User Profile:</h2>
       <div class="media">
         <div class="media-body">
-          <h2 class="account-heading">Username: {{ user.username }}</h2>
-          <p class="text-secondary">Email: {{ user.email }}</p>
+          <p class="text-secondary">Username: {{ user.username }} <br> Email: {{ user.email }}</p>
         </div>
       </div>
 	  <hr>
 	  <a href="{% url 'password_change' %}" class="btn btn-primary">Change Password</a>
-      <hr>
 	  <a href="{% url 'delete_user' %}" class="btn btn-danger">Delete Account</a>
     </div>
 {% endblock content %}
