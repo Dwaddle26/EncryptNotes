@@ -1,6 +1,0 @@
-Phase 4
-- Complete Change Log and Lessons Learned Documents
-- Add images/diagrams to Phase 4 Presentation
- --Remember that it is for a general audience/stakeholder.  No advanced technical things and only very basic diagrams showing basic overview (Django talks to MySQL database, etc).
-- Align text with note lines on list.html
-- Bug test once AI note organization is finished, squash any bugs
