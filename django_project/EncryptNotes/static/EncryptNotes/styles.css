@@ -29,6 +29,7 @@
 .notebook-page {
     background: linear-gradient(white 90%, #a5c6f7 50%) repeat-y;
     background-size: 100% 25px; /* Spacing between lines */
+	background-position: 0 20px; /* Adjust vertical position of the lines */
     border: 1px solid #ddd;
     border-left: 5px solid #fc4747; /* Red margin on the left */
     padding: 15px 20px; /* Adjust padding to align text */
@@ -65,10 +66,27 @@
 }
 
 .notebook-page strong {
-    font-size: 1.2em;
+    font-size: 2em;
     color: #333;
     display: block;
-    margin-bottom: 15px; /* Add spacing between title and content */
+    margin: 0; /* Remove any default margin */
+    padding: 0; /* Remove any default padding */
+    line-height: 25px; /* Match the line spacing of the notebook */
+    position: relative;
+    top: 1px; /* Adjust this value to align with the top line */
+}
+
+.note-category {
+    font-size: 1em; /* Match the font size */
+    color: blue; /* Set the color to blue */
+    vertical-align: bottom; /* Align vertically with the title */
+    line-height: 9px; /* Match the notebook line spacing */
+    text-decoration: none; /* Remove underline for links */
+}
+
+.note-category:hover {
+    color: darkblue; /* Optional: Change color on hover */
+    text-decoration: underline; /* Optional: Add underline on hover */
 }
 
 .notebook-page .note-buttons {

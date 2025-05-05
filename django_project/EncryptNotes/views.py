@@ -125,7 +125,6 @@ def edit(request, note_id):
         if form.is_valid():
             categorization = form.cleaned_data.get('categorized', False)
             userCat = form.cleaned_data.get('category', '').strip()
-            print(userCat)
             # Encrypt the updated title and content
             updated_title = encrypt_data(ukey, form.cleaned_data['title']).decode()
             updated_content = encrypt_data(ukey, form.cleaned_data['content']).decode()
