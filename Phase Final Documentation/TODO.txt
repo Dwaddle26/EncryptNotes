@@ -1,2 +1,0 @@
-- Begin figuring out three minute video for final.
- -- What do we want to show in it?  Will each member narrate a slide or two, then I can put it all together in a video with powerpoint slides?
